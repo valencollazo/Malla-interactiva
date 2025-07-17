@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Interactiva de la Carrera</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+    .semestre {
+      margin-bottom: 30px;
+    }
+    .titulo {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .materias {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .materia {
+      padding: 8px 12px;
+      border: 2px solid #444;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: white;
+      transition: all 0.2s;
+    }
+    .materia.tachada {
+      background-color: #d4edda;
+      color: #155724;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Malla Interactiva de la Carrera</h1>
+<p>Haz clic en las materias para marcar como aprobadas. El progreso se guarda automáticamente.</p>
+
+<div id="contenedor"></div>
+
+<script>
+const data = [
+  {
+    titulo: "Primer semestre",
+    materias: [
+      "Matemática A",
+      "Química General I",
+      "Introducción a las Ciencias Biológicas I",
+      "Prevención de Riesgos en el Laboratorio",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Segundo semestre",
+    materias: [
+      "Matemática B",
+      "Matemática C",
+      "Química General II",
+      "Introducción a las Ciencias Biológicas II",
+      "Física 101",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Tercer semestre",
+    materias: [
+      "Química Orgánica 101",
+      "Química Analítica 1",
+      "Química Inorgánica (T)",
+      "Laboratorio de Química Inorgánica",
+      "Física 102",
+      "Fisiología",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Cuarto semestre",
+    materias: [
+      "Química Orgánica 102",
+      "Química Analítica 2",
+      "Fisicoquímica 102",
+      "Física 003 (L)",
+      "Fisiopatología",
+      "Introducción al Medicamento",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Quinto semestre",
+    materias: [
+      "Farmacognosia",
+      "Botánica",
+      "Microbiología General (T)",
+      "Laboratorio de Análisis Microbiológico",
+      "Inmunología 1",
+      "Farmacocinética y Biofarmacia",
+      "Taller de Integración de Ciencias Biológicas y Biomédicas",
+      "UC Área Calidad",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Sexto semestre",
+    materias: [
+      "Química Orgánica 103 (L)",
+      "Química Orgánica 104",
+      "Química Analítica 3",
+      "Fisicoquímica 103",
+      "Bioquímica Opción III",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Séptimo semestre",
+    materias: [
+      "Química Farmacéutica 101- Teórico",
+      "Química Farmacéutica 102- Práctico",
+      "Farmacotecnia 1",
+      "Inmunología 2",
+      "Bromatología y Nutrición",
+      "Farmacología",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Octavo semestre",
+    materias: [
+      "Farmacoterapia",
+      "Farmacotecnia 2",
+      "Control de Calidad de Medicamentos I",
+      "Toxicología Fundamental",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Noveno semestre",
+    materias: [
+      "Legislación y Deontología",
+      "Gestión de Empresas",
+      "Optativas y/o electivas"
+    ]
+  },
+  {
+    titulo: "Décimo semestre",
+    materias: [
+      "Practicantado",
+      "Optativas y/o electivas"
+    ]
+  }
+];
+
+const contenedor = document.getElementById("contenedor");
+const progreso = JSON.parse(localStorage.getItem("progresoMaterias") || "{}");
+
+function guardarProgreso() {
+  localStorage.setItem("progresoMaterias", JSON.stringify(progreso));
+}
+
+data.forEach((sem, idx) => {
+  const bloque = document.createElement("div");
+  bloque.className = "semestre";
+
+  const titulo = document.createElement("div");
+  titulo.className = "titulo";
+  titulo.textContent = sem.titulo;
+  bloque.appendChild(titulo);
+
+  const materiasDiv = document.createElement("div");
+  materiasDiv.className = "materias";
+
+  sem.materias.forEach(nombre => {
+    const div = document.createElement("div");
+    div.className = "materia";
+    div.textContent = nombre;
+
+    if (progreso[nombre]) {
+      div.classList.add("tachada");
+    }
+
+    div.addEventListener("click", () => {
+      div.classList.toggle("tachada");
+      progreso[nombre] = div.classList.contains("tachada");
+      guardarProgreso();
+    });
+
+    materiasDiv.appendChild(div);
+  });
+
+  bloque.appendChild(materiasDiv);
+  contenedor.appendChild(bloque);
+});
+</script>
+
+</body>
+</html>
