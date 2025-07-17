@@ -4,22 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Malla Interactiva de la Carrera</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Raleway', sans-serif;
       padding: 20px;
-      background-color: #f8f9fa;
+      background: linear-gradient(120deg, #e0f7fa, #f0f9ff);
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Chemical_structure_background.png/800px-Chemical_structure_background.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-blend-mode: lighten;
+      color: #333;
     }
     h1 {
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #004d40;
     }
     .semestre {
       margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .titulo {
       font-weight: bold;
       font-size: 1.2em;
       margin-bottom: 10px;
+      color: #00695c;
     }
     .materias {
       display: flex;
@@ -27,24 +40,29 @@
       gap: 10px;
     }
     .materia {
-      padding: 8px 12px;
-      border: 2px solid #444;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border: 2px solid #6c757d;
+      border-radius: 10px;
+      background-color: #ffffff;
       cursor: pointer;
-      background-color: white;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    .materia:hover {
+      background-color: #f0f8ff;
     }
     .materia.tachada {
-      background-color: #d4edda;
-      color: #155724;
+      background-color: #d1e7dd;
+      color: #0f5132;
       text-decoration: line-through;
+      border-color: #198754;
     }
   </style>
 </head>
 <body>
 
-<h1>Malla Interactiva de la Carrera</h1>
-<p>Haz clic en las materias para marcar como aprobadas. El progreso se guarda automáticamente.</p>
+<h1>🧪 Malla Interactiva - Carrera Química 🧪</h1>
+<p style="text-align:center;">Haz clic en cada materia para marcarla como aprobada. El progreso se guarda automáticamente en tu navegador.</p>
 
 <div id="contenedor"></div>
 
@@ -53,114 +71,80 @@ const data = [
   {
     titulo: "Primer semestre",
     materias: [
-      "Matemática A",
-      "Química General I",
-      "Introducción a las Ciencias Biológicas I",
-      "Prevención de Riesgos en el Laboratorio",
-      "Optativas y/o electivas"
+      "Matemática A", "Química General I", "Introducción a las Ciencias Biológicas I",
+      "Prevención de Riesgos en el Laboratorio", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Segundo semestre",
     materias: [
-      "Matemática B",
-      "Matemática C",
-      "Química General II",
-      "Introducción a las Ciencias Biológicas II",
-      "Física 101",
-      "Optativas y/o electivas"
+      "Matemática B", "Matemática C", "Química General II",
+      "Introducción a las Ciencias Biológicas II", "Física 101", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Tercer semestre",
     materias: [
-      "Química Orgánica 101",
-      "Química Analítica 1",
-      "Química Inorgánica (T)",
-      "Laboratorio de Química Inorgánica",
-      "Física 102",
-      "Fisiología",
-      "Optativas y/o electivas"
+      "Química Orgánica 101", "Química Analítica 1", "Química Inorgánica (T)",
+      "Laboratorio de Química Inorgánica", "Física 102", "Fisiología", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Cuarto semestre",
     materias: [
-      "Química Orgánica 102",
-      "Química Analítica 2",
-      "Fisicoquímica 102",
-      "Física 003 (L)",
-      "Fisiopatología",
-      "Introducción al Medicamento",
-      "Optativas y/o electivas"
+      "Química Orgánica 102", "Química Analítica 2", "Fisicoquímica 102",
+      "Física 003 (L)", "Fisiopatología", "Introducción al Medicamento", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Quinto semestre",
     materias: [
-      "Farmacognosia",
-      "Botánica",
-      "Microbiología General (T)",
-      "Laboratorio de Análisis Microbiológico",
-      "Inmunología 1",
-      "Farmacocinética y Biofarmacia",
-      "Taller de Integración de Ciencias Biológicas y Biomédicas",
-      "UC Área Calidad",
-      "Optativas y/o electivas"
+      "Farmacognosia", "Botánica", "Microbiología General (T)",
+      "Laboratorio de Análisis Microbiológico", "Inmunología 1",
+      "Farmacocinética y Biofarmacia", "Taller de Integración de Ciencias Biológicas y Biomédicas",
+      "UC Área Calidad", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Sexto semestre",
     materias: [
-      "Química Orgánica 103 (L)",
-      "Química Orgánica 104",
-      "Química Analítica 3",
-      "Fisicoquímica 103",
-      "Bioquímica Opción III",
-      "Optativas y/o electivas"
+      "Química Orgánica 103 (L)", "Química Orgánica 104", "Química Analítica 3",
+      "Fisicoquímica 103", "Bioquímica Opción III", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Séptimo semestre",
     materias: [
-      "Química Farmacéutica 101- Teórico",
-      "Química Farmacéutica 102- Práctico",
-      "Farmacotecnia 1",
-      "Inmunología 2",
-      "Bromatología y Nutrición",
-      "Farmacología",
-      "Optativas y/o electivas"
+      "Química Farmacéutica 101- Teórico", "Química Farmacéutica 102- Práctico",
+      "Farmacotecnia 1", "Inmunología 2", "Bromatología y Nutrición",
+      "Farmacología", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Octavo semestre",
     materias: [
-      "Farmacoterapia",
-      "Farmacotecnia 2",
-      "Control de Calidad de Medicamentos I",
-      "Toxicología Fundamental",
-      "Optativas y/o electivas"
+      "Farmacoterapia", "Farmacotecnia 2", "Control de Calidad de Medicamentos I",
+      "Toxicología Fundamental", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Noveno semestre",
     materias: [
-      "Legislación y Deontología",
-      "Gestión de Empresas",
-      "Optativas y/o electivas"
+      "Legislación y Deontología", "Gestión de Empresas", "Optativas y/o electivas"
     ]
   },
   {
     titulo: "Décimo semestre",
     materias: [
-      "Practicantado",
-      "Optativas y/o electivas"
+      "Practicantado", "Optativas y/o electivas"
     ]
   }
 ];
 
 const contenedor = document.getElementById("contenedor");
 const progreso = JSON.parse(localStorage.getItem("progresoMaterias") || "{}");
+
+const iconos = ["🧪", "⚗️", "🔬", "🧫", "🧬"];
 
 function guardarProgreso() {
   localStorage.setItem("progresoMaterias", JSON.stringify(progreso));
@@ -181,7 +165,8 @@ data.forEach((sem, idx) => {
   sem.materias.forEach(nombre => {
     const div = document.createElement("div");
     div.className = "materia";
-    div.textContent = nombre;
+    const icono = iconos[Math.floor(Math.random() * iconos.length)];
+    div.textContent = `${icono} ${nombre}`;
 
     if (progreso[nombre]) {
       div.classList.add("tachada");
